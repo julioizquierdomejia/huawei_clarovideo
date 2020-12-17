@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'Helvetica Neue LT Std';
+    src: url('HelveticaNeueLTStd-HvCnO.woff2') format('woff2'),
+        url('HelveticaNeueLTStd-HvCnO.woff') format('woff'),
+        url('HelveticaNeueLTStd-HvCnO.svg#HelveticaNeueLTStd-HvCnO') format('svg');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
