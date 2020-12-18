@@ -7,7 +7,7 @@
 @section('content')
 <div class="cc-huawei pt-5 container">
 	<div class="row pt-5 pl-lg-5" style="min-height: calc(100vh - 73px)">
-		<div class="col-12 col-md-6 d-flex align-items-center col-xl-4 py-0 py-xl-0 pl-lg-5">
+		<div class="col-12 col-md-6 d-flex align-items-center col-xl-4 py-2 py-xl-0 pl-lg-5">
 			<div class="cc pl-lg-5">
 			<div class="row pl-lg-5 h-100">
 				<div class="col-12 page-title">
@@ -28,7 +28,7 @@
 			</div>
 			</div>
 		</div>
-		<div class="col-12 col-md-6 d-flex flex-column justify-content-between col-xl-4 py-0 py-xl-0 pl-lg-5">
+		<div class="col-12 col-md-6 d-flex flex-column justify-content-between col-xl-4 py-2 py-xl-0 pl-lg-5">
 			<p class="mt-3 text-uppercase position-relative" style="left: 50%">Escribe en tu celular <br><strong><sup>*</sup>#06#</strong> <br>y con el resultado <br> regístrate</p>
 			<div class="c-arrow" style="margin-top: -50px;margin-left: 20px">
 				<img class="img-fluid i-arrow f-3" src="/img/home/flecha3.png" width="120">
@@ -38,8 +38,8 @@
 				<img class="mobile" src="/img/home/mobile.png" width="350">
 			</div>
 		</div>
-		<div class="col-12 col-md-6 d-flex flex-column justify-content-between col-xl-4 py-0 py-xl-0 pl-lg-5">
-			<div class="c-arrow position-relative" style="left: -40%;top: 18%">
+		<div class="col-12 col-md-6 d-flex flex-column justify-content-between col-xl-4 py-2 py-xl-0 pl-lg-5">
+			<div class="c-arrow position-relative" style="left: -40%;top: 23%">
 				<img class="img-fluid i-arrow f-4" src="/img/home/flecha4.png" width="320">
 			</div>
 			<div class="text-center position-relative" style="margin-top: -40px;z-index: 2">
