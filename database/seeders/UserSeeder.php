@@ -19,11 +19,11 @@ class UserSeeder extends Seeder
         /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
         $user = new User();
         $user->name = 'Julio';
-        $user->last_name = 'Iquierdo Mejia';
+        $user->lastname = 'Iquierdo Mejia';
         $user->password = Hash::make(12345678);
         $user->email = 'julio@gmail.com';
-        $user->code = 'LYduZAuQj9';
-        $user->celular = '998913140';
+        $user->imei = 'LYduZAuQj9';
+        $user->phone = '998913140';
         $user->dni = '06813928';
         $user->save();
         

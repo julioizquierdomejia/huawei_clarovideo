@@ -23,8 +23,10 @@ Route::get('/', [App\Http\Controllers\AppController::class, 'home'])->name('home
 
 route::resource('codes', App\Http\Controllers\ImeiController::class);
 
-Route::get('/register', [App\Http\Controllers\ImeiController::class, 'register'])->name('registro');
-Route::post('/register', [App\Http\Controllers\ImeiController::class, 'store'])->name('user.store');
+Route::middleware(['guest:' . config('admin-auth.defaults.guard')])->group(function () {
+	Route::get('/registro', [App\Http\Controllers\ImeiController::class, 'register'])->name('registro');
+	Route::post('/registro', [App\Http\Controllers\ImeiController::class, 'store'])->name('user.store');
+});
 
 Route::get('/ingresar', [App\Http\Controllers\ImeiController::class, 'login'])->name('ingresar');
 Route::post('/ingresar', [App\Http\Controllers\ImeiController::class, 'login'])->name('ingresar');
@@ -34,6 +36,5 @@ Route::get('/terminos-condiciones', [App\Http\Controllers\AppController::class, 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth:' . config('admin-auth.defaults.guard')])->group(function () {
-	Route::get('/vervideo', [App\Http\Controllers\ImeiController::class, 'vervideo'])->name('codes.vervideo');
-	Route::get('/vervideo/{id?}/', [App\Http\Controllers\ImeiController::class, 'video'])->name('codes.video');
+	Route::get('/ruleta', [App\Http\Controllers\ImeiController::class, 'ruleta'])->name('codes.ruleta');
 });

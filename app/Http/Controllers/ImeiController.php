@@ -42,7 +42,7 @@ class ImeiController extends Controller
         $user = User::where('email', '=', $correo)->first();
 
         if($user)
-            return redirect('vervideo')->with('user');
+            return redirect('ruleta')->with('user');
         else
             return view('register');
     }
@@ -50,9 +50,9 @@ class ImeiController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'imei' => 'required|min:5',
             'name' => 'required|min:3',
             'lastname' => 'required|min:3',
+            'imei' => 'required|min:5',
             'dni' => 'required|digits:8',
             'phone' => 'required|min:6',
             'email' => 'required|email|max:255|unique:users',
@@ -66,32 +66,30 @@ class ImeiController extends Controller
         );
         $validator = \Validator::make($request->all(), $rules, $messages);
 
-        $imei = $request->get('imei');
         $name = $request->get('name');
-        $last_name = $request->get('lastname');
+        $lastname = $request->get('lastname');
+        $email = $request->get('email');
         $phone = $request->get('phone');
         $dni = $request->get('dni');
-        $email = $request->get('email');
+        $imei = $request->get('imei');
 
         $user_by_imei = User::where('imei', $imei)->exists();
         if ($user_by_imei === false) {
-            $imei_by_imei = Imei::where('imei', $imei)->exists();
+            $imei_by_imei = Imei::where('name', $imei)->exists();
             if ($imei_by_imei) {
                 $user = new User();
-                $user->imei = $imei;
                 $user->name = $name;
-                $user->last_name = $last_name;
-                $user->celular = $phone;
-                $user->dni = $dni;
-                $user->password = Hash::make(12345678);
+                $user->lastname = $lastname;
                 $user->email = $email;
+                $user->phone = $phone;
+                $user->dni = $dni;
+                $user->imei = $imei;
+                $user->password = Hash::make(12345678);
                 $user->save();
 
                 \Auth::login($user);
 
-                //\Cookie::queue('email', $user->email, 100);
-
-                return redirect('vervideo');
+                return redirect('ruleta');
             } else {
                 //Codigo invalido
                 $validator->getMessageBag()->add('imei', 'El código no existe.');
@@ -104,7 +102,7 @@ class ImeiController extends Controller
         return redirect()->back()->withErrors($validator);
     }
 
-    public function vervideo(Request $request)
+    public function ruleta(Request $request)
     {
         return view('videos.list', [
             //'user' => $cookie_user
@@ -142,7 +140,7 @@ class ImeiController extends Controller
             //\Cookie::queue('email', $email, 100);
             \Auth::login($user);
 
-            return redirect('vervideo')->with('user');
+            return redirect('ruleta')->with('user');
         } else {
             return redirect('/');
         }

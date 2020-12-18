@@ -41,28 +41,7 @@ class AppController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $request->validate([
-            'empresa' => 'required|min:3',
-            'cargo' => 'required|min:3',
-            'name' => 'required|min:3',
-            'email' => 'required|email|max:255|unique:users',
-        ]);
-
-        $user = new User;
-        $user->name = $request->get('name');
-        $user->email = $request->get('email');
-        $user->password = bcrypt('12345678');
-        $user->save();
-
         
-        $user_info = new InfoUser;
-        $user_info->user_id = $user->id;
-        $user_info->empresa = $request->get('empresa');
-        $user_info->cargo = $request->get('cargo');
-        $user_info->save();
-
-        return redirect()->route('clientes.index')->with('success', 'Project created successfully.');
     }
 
     /**

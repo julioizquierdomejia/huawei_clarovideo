@@ -6,100 +6,114 @@
 @endsection
 @section('content')
 <div class="cc-huawei pt-5 container">
-	<div class="pt-md-5 pb-3 mt-md-5 px-md-5">
-		<form class="row px-md-5" action="/register" method="POST" enctype="multipart/form-data">
+	<div class="row pt-5 pb-3 pl-lg-5">
+		<div class="col-12 col-md-6 col-xl-4 py-2 pl-lg-5">
+			<div class="cc pl-lg-5 h-100">
+			<div class="row pl-lg-5 h-100">
+				<div class="col-12 page-title">
+					<p class="mt-4 mb-0">con</p>
+					<h1 class="title">AppGallery y <br> Claro Video</h1>
+					<p class="mt-3 text-uppercase">Estás a un paso <br class="d-none d-md-block">de ganar grandes <br class="d-none d-md-block">premios</p>
+					<div class="c-arrow text-center pr-5">
+						<img class="img-fluid i-arrow f-1" src="/img/home/flecha1.png" style="margin-top: -20px" width="55">
+					</div>
+					<p class="mt-3 text-uppercase">Si has comprado un equipo <br class="d-none d-md-block">HMS en Claro desde el 15 de <br class="d-none d-md-block">diciembre hasta el 31 de <br class="d-none d-md-block">diciembre</p>
+					<div class="position-relative w-auto px-0">
+					<h2 class="title">¡Participa!</h2>
+					<div class="c-arrow" style="position: absolute;left: 60%;bottom: 50px;z-index: 2;right: -20%;">
+						<img class="img-fluid i-arrow f-2" src="/img/home/flecha2.png" width="150">
+					</div>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="col-12 col-md-6 col-xl-4 py-2 pl-lg-5 d-flex flex-column">
+			<p class="mt-3 text-uppercase position-relative" style="left: 50%">Escribe en tu celular <br><strong><sup>*</sup>#06#</strong> <br>y con el resultado <br> regístrate</p>
+			<div class="c-arrow" style="margin-top: -50px;margin-left: 20px">
+				<img class="img-fluid i-arrow f-3" src="/img/home/flecha3.png" width="120">
+			</div>
+			<p class="mt-3 text-uppercase">Solo debes obtener <br class="d-none d-md-block"><strong>tu IMEI</strong></p>
+			<div class="c-mobile" style="margin-top: -80px;margin-left: -40px">
+				<img class="mobile" src="/img/home/mobile.png" width="430">
+			</div>
+		</div>
+		<div class="col-12 col-md-6 col-xl-4 py-2 pl-lg-5 mx-md-auto mx-xl-0">
+			<h2 class="title px-xl-3"><strong>HOY ES TU DÍA DE SUERTE</strong></h2>
+			<form class="px-xl-3" action="/registro" method="POST" enctype="multipart/form-data">
 			@csrf
-			<div class="col-12 col-md-6 form-group">
+			<div class="form-group">
 				<div class="f-group-w-icon">
-				<input type="text" name="name" class="form-control bg-transparent pl-0 border-bottom @error('name') is-invalid @enderror" placeholder="Nombres" value="{{old('name')}}">
+				<input type="text" name="name" class="form-control border-bottom @error('name') is-invalid @enderror" placeholder="Nombres" value="{{old('name')}}">
 				<i class="far fa-user-circle icon"></i>
 				</div>
 				@error('name')
 				<p class="error-message mb-0 text-danger">{{ $message }}</p>
 				@enderror
 			</div>
-			<div class="col-12 col-md-6 form-group">
+			<div class="form-group">
 				<div class="f-group-w-icon">
-				<input type="text" name="lastname" class="form-control bg-transparent pl-0 border-bottom @error('lastname') is-invalid @enderror" placeholder="Apellidos" value="{{old('lastname')}}">
+				<input type="text" name="lastname" class="form-control border-bottom @error('lastname') is-invalid @enderror" placeholder="Apellidos" value="{{old('lastname')}}">
 				<i class="far fa-user-circle icon"></i>
 				</div>
 				@error('lastname')
 				<p class="error-message mb-0 text-danger">{{ $message }}</p>
 				@enderror
 			</div>
-			<div class="col-12 col-md-6 form-group">
+			<div class="form-group">
 				<div class="f-group-w-icon">
-				<input type="text" name="phone" class="form-control bg-transparent pl-0 border-bottom @error('phone') is-invalid @enderror" placeholder="Número celular" value="{{old('phone')}}">
-				<i class="fas fa-mobile-alt icon"></i>
-				</div>
-				@error('phone')
-				<p class="error-message mb-0 text-danger">{{ $message }}</p>
-				@enderror
-			</div>
-			<div class="col-12 col-md-6 form-group">
-				<div class="f-group-w-icon">
-				<input type="text" name="dni" class="form-control bg-transparent pl-0 border-bottom @error('dni') is-invalid @enderror" placeholder="DNI" value="{{old('dni')}}">
-				<i class="far fa-id-card icon"></i>
-				</div>
-				@error('dni')
-				<p class="error-message mb-0 text-danger">{{ $message }}</p>
-				@enderror
-			</div>
-			<div class="col-12 col-md-6 form-group">
-				<div class="f-group-w-icon">
-				<input type="text" name="email" class="form-control bg-transparent pl-0 border-bottom @error('email') is-invalid @enderror" placeholder="correo electronico" value="{{old(' is')}}">
+				<input type="text" name="email" class="form-control border-bottom @error('email') is-invalid @enderror" placeholder="correo electronico" value="{{old(' is')}}">
 				<i class="fas fa-at icon"></i>
 				</div>
 				@error('email')
 				<p class="error-message mb-0 text-danger">{{ $message }}</p>
 				@enderror
 			</div>
-			<div class="col-12 col-md-6 form-group frm-code">
+			<div class="form-group">
 				<div class="f-group-w-icon">
-				<input type="text" name="code" class="form-control bg-transparent pl-0 border-bottom @error('code') is-invalid @enderror" placeholder="código">
-				<i class="far fa-keyboard icon"></i>
-				<i class="fas fa-question-circle icon" data-toggle="modal" data-target="#modalCodeInfo" onclick="ga('send', 'event','HUAWEI_CLAROVIDEO','Registro','Que_es_esto');"></i>
+				<input type="text" name="phone" class="form-control border-bottom @error('phone') is-invalid @enderror" placeholder="Celular" value="{{old('phone')}}">
+				<i class="fas fa-mobile-alt icon"></i>
 				</div>
-				@error('code')
+				@error('phone')
+				<p class="error-message mb-0 text-danger">{{ $message }}</p>
+				@enderror
+			</div>
+			<div class="form-group">
+				<div class="f-group-w-icon">
+				<input type="text" name="dni" class="form-control border-bottom @error('dni') is-invalid @enderror" placeholder="DNI" value="{{old('dni')}}">
+				<i class="far fa-id-card icon"></i>
+				</div>
+				@error('dni')
+				<p class="error-message mb-0 text-danger">{{ $message }}</p>
+				@enderror
+			</div>
+			<div class="form-group frm-imei">
+				<div class="f-group-w-icon">
+				<input type="text" name="imei" class="form-control border-bottom @error('imei') is-invalid @enderror" placeholder="IMEI">
+				<i class="far fa-keyboard icon"></i>
+				</div>
+				@error('imei')
 				<p class="error-message mb-0 text-danger">{{ $message }}</p>
 				@enderror
 			</div>
 			<div class="col-12 form-group pb-4">
 				<div class="form-check" style="line-height: 13px;">
 					<input class="form-check-input align-middle" type="checkbox" value="" id="defaultCheckTerms" name="confirm_terms">
-					<label class="form-check-label small align-middle" for="defaultCheckTerms" style="font-size: 13px;">
-						<span>Acepto y estoy de acuerdo con los <a class="text-white" target="_blank" href="/terminos-condiciones"><u>Términos y Condiciones y Autorización de Tratamiento de Datos Personales</u></a></span>
+					<label class="form-check-label small align-middle text-danger" for="defaultCheckTerms" style="font-size: 13px;">
+						<span>Acepto y estoy de acuerdo con los <a class="text-danger" target="_blank" href="/terminos-condiciones"><u>Términos y Condiciones y Autorización de Tratamiento de Datos Personales</u></a></span>
 					</label>
 				</div>
 				@error('confirm_terms')
 				<p class="error-message mb-0 text-danger">{{ $message }}</p>
 				@enderror
 			</div>
-			<div class="col-12 text-center">
+			<div class="col-12 text-left">
 				<button class="btn btn-red-transparent btn-login px-4" type="submit" onclick="ga('send', 'event','HUAWEI_CLAROVIDEO','Registro','Continuar');">Ingresar <i class="fa fa-play pl-2"></i></button>
 			</div>
 		</form>
-		
+		</div>
 	</div>
 </div>
-<div class="modal fade" id="modalCodeInfo" tabindex="-1" role="dialog" aria-labelledby="modalRegisterTitle" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content bg-dark">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalRegisterTitle">Tu código de Masterclass</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body text-center">
-            <img class="img-fluid" src="{{ asset('img/home/d2.png') }}">
-          </div>
-          <div class="modal-footer justify-content-center">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-          </div>
-        </div>
-      </div>
-    </div>
 @endsection
 @section('javascript')
 <script type="text/javascript">

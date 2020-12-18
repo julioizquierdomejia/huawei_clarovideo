@@ -45,9 +45,9 @@
     @yield('header_script')
   </head>
   <body class="page text-white {{isset($body_class) ? $body_class : ''}}">
-    <main class="main" id="app" style="display: flex;flex-direction: column;min-height: 100vh;">
+    <main class="main" id="app">
       @include('layouts.header')
-      <div class="content pt-4">
+      <div class="content pt-4 align-items-center" style="display: flex;min-height: 100vh;align-items: center;">
         @yield('content')
       </div>
       @include('layouts.footer')
