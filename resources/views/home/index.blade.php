@@ -6,13 +6,13 @@
 @endsection
 @section('content')
 <div class="cc-huawei pt-5 container">
-	<div class="row pt-5 pb-3 pl-lg-5">
-		<div class="col-12 col-md-6 col-xl-4 py-2 pl-lg-5">
+	<div class="row pt-5 pl-lg-5">
+		<div class="col-12 col-md-6 col-xl-4 py-0 py-xl-0 pl-lg-5">
 			<div class="cc pl-lg-5 h-100">
 			<div class="row pl-lg-5 h-100">
 				<div class="col-12 page-title">
 					<p class="mt-4 mb-0">con</p>
-					<h1 class="title">AppGallery y <br> Claro Video</h1>
+					<h1 class="title">AppGallery y <br> Claro video</h1>
 					<p class="mt-3 text-uppercase">Estás a un paso <br class="d-none d-md-block">de ganar grandes <br class="d-none d-md-block">premios</p>
 					<div class="c-arrow text-center pr-5">
 						<img class="img-fluid i-arrow f-1" src="/img/home/flecha1.png" style="margin-top: -20px" width="55">
@@ -28,17 +28,17 @@
 			</div>
 			</div>
 		</div>
-		<div class="col-12 col-md-6 col-xl-4 py-2 pl-lg-5 d-flex flex-column">
+		<div class="col-12 col-md-6 col-xl-4 py-0 py-xl-0 pl-lg-5 d-flex flex-column">
 			<p class="mt-3 text-uppercase position-relative" style="left: 50%">Escribe en tu celular <br><strong><sup>*</sup>#06#</strong> <br>y con el resultado <br> regístrate</p>
 			<div class="c-arrow" style="margin-top: -50px;margin-left: 20px">
 				<img class="img-fluid i-arrow f-3" src="/img/home/flecha3.png" width="120">
 			</div>
 			<p class="mt-3 text-uppercase">Solo debes obtener <br class="d-none d-md-block"><strong>tu IMEI</strong></p>
-			<div class="c-mobile" style="margin-top: -80px;margin-left: -40px">
-				<img class="mobile" src="/img/home/mobile.png" width="430">
+			<div class="c-mobile" style="">
+				<img class="mobile" src="/img/home/mobile.png" width="350">
 			</div>
 		</div>
-		<div class="col-12 col-md-6 col-xl-4 py-2 pl-lg-5">
+		<div class="col-12 col-md-6 col-xl-4 py-0 py-xl-0 pl-lg-5">
 			<div class="c-arrow position-relative" style="left: -40%;top: 18%">
 				<img class="img-fluid i-arrow f-4" src="/img/home/flecha4.png" width="320">
 			</div>
