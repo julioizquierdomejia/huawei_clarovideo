@@ -47,7 +47,7 @@
   <body class="page text-white {{isset($body_class) ? $body_class : ''}}">
     <main class="main" id="app">
       @include('layouts.header')
-      <div class="content pt-4 align-items-center" style="display: flex;min-height: 100vh;align-items: center;">
+      <div class="content pt-4 d-flex align-items-center" style="min-height: 100vh;">
         @yield('content')
       </div>
       @include('layouts.footer')
