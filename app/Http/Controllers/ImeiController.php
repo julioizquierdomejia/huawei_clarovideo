@@ -104,9 +104,7 @@ class ImeiController extends Controller
 
     public function ruleta(Request $request)
     {
-        return view('videos.list', [
-            //'user' => $cookie_user
-        ]);
+        return view('videos.list');
     }
 
     public function video(Request $request, $slug)
