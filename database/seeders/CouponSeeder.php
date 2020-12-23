@@ -12,28 +12,28 @@ class CouponSeeder extends Seeder
      *
      * @return void
      */
+    function insertquote($value) {
+            return "'$value'";
+        }
+
     public function run()
     {
-        $row = 1;
+        $lineNumber = 1;
         if (($handle = fopen(base_path("public/coupons.csv"), "r")) !== false) {
-            while (($data = fgetcsv($handle, 0, ",")) !== false) {
-                if ($row === 1) {
-                    $row++;
+            while (($data = fgets($handle)) !== false) {
+                if ($lineNumber === 1) {
+                    $lineNumber++;
                     continue;
                 }
-                $row++;
+                $lineNumber++;
 
-                $dbData = [
-                    'code' => '"'.$data[0].'"',
-                    'validity_date' => '2021-03-30',
-                ];
+                $row = str_getcsv($data, ";");
+                $date = date('Y-m-d', strtotime(str_replace("/", "-", $row[1])));
 
-                $colNames = array_keys($dbData);
+                $createQuery = 'INSERT INTO coupons (code, validity_date) VALUES ("'.$row[0].'","'.$date.'")';
 
-                $createQuery = 'INSERT INTO coupons ('.implode(',', $colNames).') VALUES ('.implode(',', $dbData).')';
-
-                DB::statement($createQuery, $data);
-                $this->command->info($row);
+                DB::statement($createQuery, $row);
+                $this->command->info($lineNumber);
             }
             fclose($handle);
         }

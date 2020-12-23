@@ -15,25 +15,21 @@ class ImeiSeeder extends Seeder
     public function run()
     {
         //
-        $row = 1;
+        $lineNumber = 1;
         if (($handle = fopen(base_path("public/imeis.csv"), "r")) !== false) {
-            while (($data = fgetcsv($handle, 0, ",")) !== false) {
-                if ($row === 1) {
-                    $row++;
+            while (($data = fgets($handle)) !== false) {
+                if ($lineNumber === 1) {
+                    $lineNumber++;
                     continue;
                 }
-                $row++;
+                $lineNumber++;
 
-                $dbData = [
-                    'code' => '"'.$data[0].'"',
-                ];
+                $row = str_getcsv($data, ",");
 
-                $colNames = array_keys($dbData);
+                $createQuery = 'INSERT INTO imeis (code) VALUES ('.$row[0].')';
 
-                $createQuery = 'INSERT INTO imeis ('.implode(',', $colNames).') VALUES ('.implode(',', $dbData).')';
-
-                DB::statement($createQuery, $data);
-                $this->command->info($row);
+                DB::statement($createQuery, $row);
+                $this->command->info($lineNumber);
             }
             fclose($handle);
         }
