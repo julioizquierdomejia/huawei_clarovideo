@@ -74,7 +74,7 @@
 			</div>
 			<div class="form-group frm-imei">
 				<div class="f-group-w-icon">
-				<input type="text" name="imei" class="form-control border-bottom @error('imei') is-invalid @enderror" placeholder="IMEI">
+				<input type="text" name="imei" class="form-control border-bottom @error('imei') is-invalid @enderror" placeholder="IMEI" value="{{old('imei')}}">
 				<i class="far fa-keyboard icon"></i>
 				</div>
 			</div>
