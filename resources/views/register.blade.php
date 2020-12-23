@@ -80,7 +80,7 @@
 			</div>
 			<div class="form-group pl-3">
 				<div class="form-check form-control border-0 bg-transparent p-0 h-auto @error('confirm_terms') is-invalid @enderror" style="line-height: 13px;">
-					<input class="form-check-input align-middle" type="checkbox" value="" id="defaultCheckTerms" name="confirm_terms">
+					<input class="form-check-input align-middle" type="checkbox" value="1" id="defaultCheckTerms" name="confirm_terms" {{old('confirm_terms') == 1 ? 'checked' : ''}}>
 					<label class="form-check-label small align-middle text-danger" for="defaultCheckTerms" style="font-size: 13px;">
 						<span>Acepto y estoy de acuerdo con los <a class="text-danger" target="_blank" href="/terminos-condiciones"><u>Términos y Condiciones y Autorización de Tratamiento de Datos Personales</u></a></span>
 					</label>
