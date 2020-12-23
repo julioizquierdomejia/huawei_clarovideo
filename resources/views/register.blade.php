@@ -3,6 +3,32 @@
 <script>
     ga('send', 'event','HUAWEI_CLAROVIDEO','Inicio','Registrate');
 </script>
+<style type="text/css">
+	.arrow-participa {
+		position: absolute;left: 60%;bottom: 60px;z-index: 2;right: -20%;
+	}
+	@media (min-width: 768px) {
+		.escribe-celular {
+			left: 50%;
+		}
+		.arrow-3 {
+			margin-top: -50px;
+			margin-left: 20px
+		}
+		.arrow-4 {
+			left: -40%;
+			top: 23%
+		}
+		.registered {
+			margin-top: -40px;z-index: 2
+		}
+	}
+	@media (max-width: 767px) {
+		.arrow-participa {
+			position: static;
+		}
+	}
+</style>
 @endsection
 @section('content')
 <div class="cc-huawei pt-5 container">
@@ -12,16 +38,16 @@
 			<div class="row pl-lg-5 h-100">
 				<div class="col-12 page-title">
 					<p class="mt-4 mb-0">con</p>
-					<h1 class="title">AppGallery y <br> Claro Video</h1>
+					<h1 class="title">AppGallery y <br class="d-none d-md-block"> Claro Video</h1>
 					<p class="mt-3 text-uppercase">Estás a un paso <br class="d-none d-md-block">de ganar grandes <br class="d-none d-md-block">premios</p>
 					<div class="c-arrow text-center pr-5">
-						<img class="img-fluid i-arrow f-1" src="/img/home/flecha1.png" style="margin-top: -20px" width="55">
+						<img class="img-fluid i-arrow f-1 d-none d-md-block" src="/img/home/flecha1.png" style="margin-top: -20px" width="55">
 					</div>
 					<p class="mt-3 text-uppercase">Si has comprado un equipo <br class="d-none d-md-block">HMS en Claro desde el 15 de <br class="d-none d-md-block">diciembre hasta el 31 de <br class="d-none d-md-block">diciembre</p>
 					<div class="position-relative w-auto px-0">
 					<h2 class="title">¡Participa!</h2>
-					<div class="c-arrow" style="position: absolute;left: 60%;bottom: 50px;z-index: 2;right: -20%;">
-						<img class="img-fluid i-arrow f-2" src="/img/home/flecha2.png" width="150">
+					<div class="c-arrow arrow-participa">
+						<img class="img-fluid i-arrow f-2 d-none d-md-block" src="/img/home/flecha2.png" width="150">
 					</div>
 					</div>
 				</div>
@@ -29,11 +55,12 @@
 			</div>
 		</div>
 		<div class="col-12 col-md-6 col-xl-4 pt-2 pt-xl-0 pl-lg-5 d-flex flex-column justify-content-between">
-			<p class="mt-3 text-uppercase position-relative" style="left: 50%">Escribe en tu celular <br><strong><sup>*</sup>#06#</strong> <br>y con el resultado <br> regístrate</p>
-			<div class="c-arrow" style="margin-top: -50px;margin-left: 20px">
-				<img class="img-fluid i-arrow f-3" src="/img/home/flecha3.png" width="120">
+			<p class="mt-3 text-uppercase d-block d-md-none">Solo debes obtener <br class="d-none d-md-block"><strong>tu IMEI</strong></p>
+			<p class="mt-3 text-uppercase position-relative escribe-celular">Escribe en tu celular <br class="d-none d-md-block"><strong><sup>*</sup>#06#</strong> <br class="d-none d-md-block">y con el resultado <br class="d-none d-md-block"> regístrate</p>
+			<div class="c-arrow arrow-3">
+				<img class="img-fluid i-arrow f-3 d-none d-md-block" src="/img/home/flecha3.png" width="120">
 			</div>
-			<p class="mt-3 text-uppercase">Solo debes obtener <br class="d-none d-md-block"><strong>tu IMEI</strong></p>
+			<p class="mt-3 text-uppercase d-none d-md-block">Solo debes obtener <br class="d-none d-md-block"><strong>tu IMEI</strong></p>
 			<div class="c-mobile" style="">
 				<img class="mobile" src="/img/home/mobile.png" width="430">
 			</div>

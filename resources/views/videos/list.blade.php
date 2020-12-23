@@ -31,6 +31,17 @@
 	    border-right-width: 15px;
 	    margin-left: -15px;
 	}
+	@media (min-width: 768px) {
+		.subtitle {
+			font-size: 20px;width: 60%;
+		}
+	}
+	@media (max-width: 767px) {
+		#canvas {
+			width: 100%;
+			height: auto;
+		}
+	}
 </style>
 @endsection
 @section('content')
@@ -39,17 +50,17 @@
 		<div class="col-12 col-md-5 col-lg-4 py-2 pl-lg-5">
 			<div class="cc pl-lg-5 h-100">
 			<div class="row pl-lg-5 h-100">
-				<div class="col-12 pt-lg-3 page-title">
+				<div class="col-12 pt-lg-3 page-title text-center text-md-left">
 					<h1 class="title pt-md-4">SUERTE</h1>
-					<p class="mt-5 text-uppercase" style="font-size: 20px;width: 60%;">
-						Gira el LuckyDraw de <br>AppGallery y Gana <br>uno de estos grandes <br>Premios
+					<p class="mt-5 text-uppercase subtitle">
+						Gira el LuckyDraw de <br class="d-none d-md-block">AppGallery y Gana <br class="d-none d-md-block">uno de estos grandes <br class="d-none d-md-block">Premios
 					</p>
 				</div>
 			</div>
 			</div>
 		</div>
 		<div class="col-12 col-md-7 col-lg-8 text-center">
-			<div class="d-inline-block pt-5">
+			<div class="d-inline-block pt-md-5">
 			<div class="position-relative d-flex align-items-center justify-content-center">
 				<button class="btn btn-warning btn-spin rounded-circle" id="spin">
 					<span class="btn-text d-table rounded-circle h-100 w-100">
