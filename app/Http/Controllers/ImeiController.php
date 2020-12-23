@@ -111,35 +111,52 @@ class ImeiController extends Controller
             if ($exist_winner) {
                 return response()->json(['data'=>"Ya ganó :)", 'success'=>false]);
             } else {
-                $prize->total -= $prize->quantity;
-                $prize->save();
-
-                $winner = new Winner();
-                $winner->user_id = $user_id;
-                $winner->prize_id = $prize_id;
-                $winner->save();
+                $prize_data = $prize
+                        ->makeHidden('total')
+                        ->makeHidden('original_total')
+                        ->makeHidden('quantity');
 
                 if ($prize->type == 'dinamic') {
                     $coupons = Coupon::where('is_used', 0)
                             ->limit($prize->quantity)
                             ->orderBy('created_at', 'asc')
                             ->get();
+                    if ($coupons->count()) {
+                        //Reducir total si existen cupones
+                        $prize->total -= $prize->quantity;
+                        $prize->save();
 
-                    foreach ($coupons as $key => $coupon) {
-                        $coupon_winner = new CouponWinner();
-                        $coupon_winner->user_id = $user_id;
-                        $coupon_winner->coupon_id = $coupon->id;
-                        $coupon_winner->save();
+                        $winner = new Winner();
+                        $winner->user_id = $user_id;
+                        $winner->prize_id = $prize_id;
+                        $winner->save();
 
-                        $coupon_updated = Coupon::find($coupon->id);
-                        $coupon_updated->is_used = 1;
-                        $coupon_updated->save();
+                        foreach ($coupons as $key => $coupon) {
+                            $coupon_winner = new CouponWinner();
+                            $coupon_winner->user_id = $user_id;
+                            $coupon_winner->coupon_id = $coupon->id;
+                            $coupon_winner->save();
+
+                            $coupon_updated = Coupon::find($coupon->id);
+                            $coupon_updated->is_used = 1;
+                            $coupon_updated->save();
+                        }
+                        return response()->json(['data'=>json_encode($prize_data),'success'=>true]);
+                    } else {
+                        return response()->json(['data'=>"Alguien más se adelantó :(", 'success'=>false]);
                     }
+                } else {
+                    //Reducir si no es cupon pero existe el premio
+                    $prize->total -= $prize->quantity;
+                    $prize->save();
+
+                    $winner = new Winner();
+                    $winner->user_id = $user_id;
+                    $winner->prize_id = $prize_id;
+                    $winner->save();
+
+                    return response()->json(['data'=>json_encode($prize_data),'success'=>true]);
                 }
-
-                $prize_data = $prize->makeHidden('total')->makeHidden('original_total')->makeHidden('quantity');
-
-                return response()->json(['data'=>json_encode($prize_data),'success'=>true]);
             }
         }
         return response()->json(['success'=>false]);
