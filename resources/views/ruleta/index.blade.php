@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Ruleta'])
+@extends('layouts.app', ['title' => 'LuckyDraw'])
 @section('header_script')
 <style type="text/css">
 	.page .btn.btn-spin {
@@ -45,7 +45,7 @@
 </style>
 @endsection
 @section('content')
-<div class="cc-huawei container-fluid text-white">
+<div class="cc-huawei pt-5 container-fluid text-white">
 	<div class="row pb-3 pl-lg-5 align-items-center">
 		<div class="col-12 col-md-5 col-lg-4 py-2 pl-lg-5">
 			<div class="cc pl-lg-5 h-100">

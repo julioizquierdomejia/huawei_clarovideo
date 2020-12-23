@@ -92,7 +92,7 @@ class ImeiController extends Controller
     public function ruleta(Request $request)
     {
         $prizes = Prize::where('enabled', 1)->get();
-        return view('videos.list', compact('prizes'));
+        return view('ruleta.index', compact('prizes'));
     }
 
     public function storeWinner(Request $request)
@@ -162,18 +162,6 @@ class ImeiController extends Controller
         return response()->json(['success'=>false]);
     }
 
-    public function video(Request $request, $slug)
-    {
-        $array = array('cocina-peruana', 'fullbody');
-        if (in_array($slug, $array) == false) {
-            return redirect('/');
-        }
-        //$video = Video::where('id', $id)->firstOrFail();
-        return view('videos.show', [
-            'video' => $slug
-        ]);
-    }
-
     public function login(Request $request)
     {
         $rules = array(
@@ -197,11 +185,6 @@ class ImeiController extends Controller
         } else {
             return redirect('/');
         }
-    }
-
-    public function opcion(Request $request)
-    {
-        return view('opcion');
     }
 
 
