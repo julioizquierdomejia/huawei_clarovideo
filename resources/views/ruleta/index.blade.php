@@ -76,6 +76,7 @@
 </div>
 @endsection
 @section('javascript')
+<script src="//unpkg.com/canvas-txt"></script>
 <script type="text/javascript">
 	var options = {!!json_encode($prizes->toArray())!!};
 
@@ -111,9 +112,37 @@
 	  return RGB2Color(red,green,blue);
 	}
 
+	function wrapText(context, text, x, y, maxWidth, lineHeight) {
+        var words = text.split(' ');
+        var line = '';
+
+        for(var n = 0; n < words.length; n++) {
+          var testLine = line + words[n] + ' ';
+          var metrics = context.measureText(testLine);
+          var testWidth = metrics.width;
+          if (testWidth > maxWidth && n > 0) {
+            context.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+          }
+          else {
+            line = testLine;
+          }
+        }
+        context.fillText(line, x, y);
+      }
+
 	function drawRouletteWheel() {
-	  var canvas = document.getElementById("canvas");
-	  if (canvas.getContext) {
+		var background = new Image();
+		background.src = "http://i.imgur.com/yf6d9SX.jpg";
+
+		background.onload = function(){
+		    ctx.drawImage(background,0,0);   
+		}
+		var canvas = document.getElementById("canvas");
+		var canvasTxt = window.canvasTxt.default
+		
+	 	if (canvas.getContext) {
 	    var outsideRadius = 200;
 	    var textRadius = 160;
 	    var insideRadius = 5;
@@ -140,7 +169,7 @@
 	      ctx.arc(250, 250, outsideRadius, angle, angle + arc, false);
 	      ctx.arc(250, 250, insideRadius, angle + arc, angle, true);
 	      ctx.stroke();
-	      ctx.fill();
+	      //ctx.fill();
 
 	      ctx.save();
 	      /*ctx.shadowOffsetX = -1;
@@ -152,12 +181,14 @@
 	                    250 + Math.sin(angle + arc / 2) * textRadius);
 	      ctx.rotate(angle + arc / 2 + Math.PI / 2);
 	      var text = options[i]['name'];
-	      ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+	      console.log((-ctx.measureText(text).width / 2))
+	      //ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+	      canvasTxt.drawText(ctx, text, 60, 60, 100, 100);
 	      ctx.restore();
 	    } 
 
 	    //Arrow
-	    ctx.fillStyle = "white";
+	    /*ctx.fillStyle = "white";
 	    ctx.beginPath();
 	    ctx.moveTo(250 - 4, 250 - (outsideRadius + 5));
 	    ctx.lineTo(250 + 4, 250 - (outsideRadius + 5));
@@ -167,7 +198,7 @@
 	    ctx.lineTo(250 - 9, 250 - (outsideRadius - 5));
 	    ctx.lineTo(250 - 4, 250 - (outsideRadius - 5));
 	    ctx.lineTo(250 - 4, 250 - (outsideRadius + 5));
-	    ctx.fill();
+	    ctx.fill();*/
 	  }
 	}
 
