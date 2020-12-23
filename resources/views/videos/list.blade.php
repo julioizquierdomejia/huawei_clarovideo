@@ -66,7 +66,8 @@
 @endsection
 @section('javascript')
 <script type="text/javascript">
-	var options = {!!json_encode($prizes->toArray())!!};
+	$(document).ready(function (event) {
+		var options = {!!json_encode($prizes->toArray())!!};
 
 	var startAngle = 0;
 	var arc = Math.PI / (options.length / 2);
@@ -237,5 +238,6 @@
 	}
 
 	drawRouletteWheel();
+	})
 </script>
 @endsection
