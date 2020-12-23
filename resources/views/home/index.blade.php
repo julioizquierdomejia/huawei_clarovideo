@@ -32,12 +32,12 @@
 @endsection
 @section('content')
 <div class="cc-huawei pt-5 container">
-	<div class="row pt-5 pl-lg-5" style="min-height: calc(100vh - 73px)">
+	<div class="row pl-lg-5" style="min-height: calc(100vh - 73px)">
 		<div class="col-12 col-md-6 d-flex align-items-center col-xl-4 py-2 py-xl-0 pl-lg-5">
 			<div class="cc pl-lg-5">
 			<div class="row pl-lg-5 h-100">
 				<div class="col-12 page-title">
-					<p class="mt-4 mb-0">con</p>
+					<p class="mt-md-4 mb-0">con</p>
 					<h1 class="title">AppGallery y <br class="d-none d-md-block"> Claro video</h1>
 					<p class="mt-3 text-uppercase">Estás a un paso <br class="d-none d-md-block">de ganar grandes <br class="d-none d-md-block">premios</p>
 					<div class="c-arrow text-center pl-4">
