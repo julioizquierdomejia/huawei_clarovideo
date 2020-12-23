@@ -58,7 +58,7 @@
 				</button>
 				<canvas id="canvas" width="500" height="500"></canvas>
 			</div>
-			<div class="prize mt-4"></div>
+			<div class="prize mt-2" style="display: none;">Ganó <span class="prize-text"></span></div>
 			</div>
 		</div>
 	</div>
@@ -187,9 +187,9 @@
 	  var degrees = startAngle * 180 / Math.PI + 90;
 	  var arcd = arc * 180 / Math.PI;
 	  var index = Math.floor((360 - degrees % 360) / arcd);
+	  var text = options[index]['name']
 	  /*ctx.save();
 	  ctx.font = 'bold 30px Helvetica, Arial';
-	  var text = options[index]['name']
 	  ctx.fillText(text, 250 - ctx.measureText(text).width / 2, 250 + 10);*/
 	  ctx.restore();
 	  $('#spin').show();
@@ -210,19 +210,18 @@
                   'Su premio es: ' + data.name,
                   'success'
                 ).then((after) => {
-                    $('.prize').text(text);
+                    $('.prize').show();
+                    $('.prize-text').text(text)
                 })
             } else {
                 Swal.fire(
                   'LUCKYDRAW',
                   result.data,
                   'warning'
-                )
+                ).then((after) => {
+                    $('.prize').hide();
+                })
             }
-
-            setInterval(function () {
-		        $('.prize').hide();
-		    }, 10 * 1000);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             var errors = jqXHR.responseJSON;
