@@ -1,6 +1,40 @@
 @extends('layouts.app', ['title' => 'Ruleta'])
+@section('header_script')
+<style type="text/css">
+	.page .btn.btn-spin {
+		background-color: #fdc20e;
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    margin-left: -60px;
+	    margin-top: -60px;
+	    min-width: 120px;
+	    width: 120px;
+	    height: 120px;
+	    padding: 15px;
+	}
+	.page .btn-spin .btn-text {
+		background-color: #fff;
+	}
+	.page .btn.btn-spin:before {
+	    content: '';
+	    position: absolute;
+	    left: 50%;
+	    top: -24px;
+	    width: 0;
+	    height: 0;
+	    border: 25px solid #ffed4a;
+	    border-left-color: transparent;
+	    border-right-color: transparent;
+	    border-top: 0;
+	    border-left-width: 15px;
+	    border-right-width: 15px;
+	    margin-left: -15px;
+	}
+</style>
+@endsection
 @section('content')
-<div class="cc-huawei container-fluid">
+<div class="cc-huawei container-fluid text-white">
 	<div class="row pb-3 pl-lg-5 align-items-center">
 		<div class="col-12 col-md-5 col-lg-4 py-2 pl-lg-5">
 			<div class="cc pl-lg-5 h-100">
@@ -15,9 +49,15 @@
 			</div>
 		</div>
 		<div class="col-12 col-md-7 col-lg-8 text-center">
-			<div class="position">
-				<button class="btn btn-warning" id="spin">Girar</button>
+			<div class="d-inline-block pt-5">
+			<div class="position-relative d-flex align-items-center justify-content-center">
+				<button class="btn btn-warning btn-spin rounded-circle" id="spin">
+					<span class="btn-text d-table rounded-circle h-100 w-100">
+						<span class="d-table-cell align-middle">Click <span class="d-block">aquí</span></span>
+					</span>
+				</button>
 				<canvas id="canvas" width="500" height="500"></canvas>
+			</div>
 			</div>
 		</div>
 	</div>
@@ -25,7 +65,7 @@
 @endsection
 @section('javascript')
 <script type="text/javascript">
-	var options = ["$100", "$10", "$25", "$250", "$30", "$1000", "$1", "$200", "$45", "$500", "$5", "$20", "Lose", "$1000000", "Lose", "$350", "$5", "$99"];
+	var options = {!!json_encode($prizes->toArray())!!};
 
 	var startAngle = 0;
 	var arc = Math.PI / (options.length / 2);
@@ -66,20 +106,25 @@
 	  if (canvas.getContext) {
 	    var outsideRadius = 200;
 	    var textRadius = 160;
-	    var insideRadius = 125;
+	    var insideRadius = 5;
 
 	    ctx = canvas.getContext("2d");
 	    ctx.clearRect(0,0,500,500);
 
-	    ctx.strokeStyle = "black";
-	    ctx.lineWidth = 2;
+	    ctx.strokeStyle = "#fc1a1b";
+	    ctx.lineWidth = 25;
 
-	    ctx.font = 'bold 12px Helvetica, Arial';
+	    ctx.font = '500 15px Helvetica, Arial';
 
 	    for(var i = 0; i < options.length; i++) {
 	      var angle = startAngle + i * arc;
 	      //ctx.fillStyle = colors[i];
-	      ctx.fillStyle = getColor(i, options.length);
+	      //ctx.fillStyle = getColor(i, options.length);
+	      if(i % 2 == 0) {
+	      	ctx.fillStyle = "#aaa";
+	      } else {
+	      	ctx.fillStyle = "#222";
+	      }
 
 	      ctx.beginPath();
 	      ctx.arc(250, 250, outsideRadius, angle, angle + arc, false);
@@ -88,21 +133,21 @@
 	      ctx.fill();
 
 	      ctx.save();
-	      ctx.shadowOffsetX = -1;
+	      /*ctx.shadowOffsetX = -1;
 	      ctx.shadowOffsetY = -1;
 	      ctx.shadowBlur    = 0;
-	      ctx.shadowColor   = "rgb(220,220,220)";
-	      ctx.fillStyle = "black";
+	      ctx.shadowColor   = "#000";*/
+	      ctx.fillStyle = "white";
 	      ctx.translate(250 + Math.cos(angle + arc / 2) * textRadius, 
 	                    250 + Math.sin(angle + arc / 2) * textRadius);
 	      ctx.rotate(angle + arc / 2 + Math.PI / 2);
-	      var text = options[i];
+	      var text = options[i]['name'];
 	      ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
 	      ctx.restore();
 	    } 
 
 	    //Arrow
-	    ctx.fillStyle = "black";
+	    ctx.fillStyle = "white";
 	    ctx.beginPath();
 	    ctx.moveTo(250 - 4, 250 - (outsideRadius + 5));
 	    ctx.lineTo(250 + 4, 250 - (outsideRadius + 5));
@@ -133,6 +178,7 @@
 	  startAngle += (spinAngle * Math.PI / 180);
 	  drawRouletteWheel();
 	  spinTimeout = setTimeout('rotateWheel()', 30);
+	  $('#spin').hide();
 	}
 
 	function stopRotateWheel() {
@@ -142,9 +188,31 @@
 	  var index = Math.floor((360 - degrees % 360) / arcd);
 	  ctx.save();
 	  ctx.font = 'bold 30px Helvetica, Arial';
-	  var text = options[index]
+	  var text = options[index]['name']
 	  ctx.fillText(text, 250 - ctx.measureText(text).width / 2, 250 + 10);
 	  ctx.restore();
+	  $('#spin').show();
+	  $('#spin .btn-text .d-table-cell').text(text);
+
+	  $.ajax({
+        type: 'POST',
+        url: '/winner',
+        data: {
+        	'_token': '{{csrf_token()}}',
+        	'prize_id': options[index]['id']
+        },
+        success: function(result) {
+            if(result.status == "success") {
+                console.log(result)
+            } else {
+                console.log("ya ganó :)");
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            var errors = jqXHR.responseJSON;
+            console.log(errors)
+        }
+    });
 	}
 
 	function easeOut(t, b, c, d) {

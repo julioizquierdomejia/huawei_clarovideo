@@ -25,7 +25,7 @@ class ImeiSeeder extends Seeder
                 $row++;
 
                 $dbData = [
-                    'name' => '"'.$data[0].'"',
+                    'code' => '"'.$data[0].'"',
                 ];
 
                 $colNames = array_keys($dbData);

@@ -16,8 +16,10 @@ class CreatePrizesTable extends Migration
         Schema::create('prizes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('original_total');
+            $table->integer('total');
             $table->integer('quantity');
-            $table->integer('type');
+            $table->string('type');
             $table->boolean('enabled')->default(1);
             $table->timestamps();
         });

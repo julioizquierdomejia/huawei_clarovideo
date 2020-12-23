@@ -37,4 +37,6 @@ Route::get('/terminos-condiciones', [App\Http\Controllers\AppController::class, 
 
 Route::middleware(['auth:' . config('admin-auth.defaults.guard')])->group(function () {
 	Route::get('/ruleta', [App\Http\Controllers\ImeiController::class, 'ruleta'])->name('codes.ruleta');
+
+	Route::post('/winner', [App\Http\Controllers\ImeiController::class, 'storeWinner'])->name('store_winner');
 });

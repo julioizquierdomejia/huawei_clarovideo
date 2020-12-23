@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Imei;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Prize;
+use App\Models\Winner;
 use Illuminate\Support\Facades\Hash;
 
 class ImeiController extends Controller
@@ -75,7 +77,7 @@ class ImeiController extends Controller
 
         $user_by_imei = User::where('imei', $imei)->exists();
         if ($user_by_imei === false) {
-            $imei_by_imei = Imei::where('name', $imei)->exists();
+            $imei_by_imei = Imei::where('code', $imei)->exists();
             if ($imei_by_imei) {
                 $user = new User();
                 $user->name = $name;
@@ -104,7 +106,34 @@ class ImeiController extends Controller
 
     public function ruleta(Request $request)
     {
-        return view('videos.list');
+        $prizes = Prize::where('enabled', 1)->get();
+        return view('videos.list', compact('prizes'));
+    }
+
+    public function storeWinner(Request $request)
+    {
+        $rules = array(
+            'prize_id' => 'required|exists:prizes,id',
+        );
+
+        $prize_id = $request->get('prize_id');
+        $user_id = \Auth::id();
+
+        $exist_winner = Winner::where('user_id', $user_id)->exists();
+
+        $prize = Prize::findOrFail($prize_id);
+        if ($prize->total >= $prize->quantity && $exist_winner == false) {
+            $prize->total -= $prize->quantity;
+            $prize->save();
+
+            $winner = new Winner();
+            $winner->user_id = $user_id;
+            $winner->prize_id = $prize_id;
+            $winner->save();
+
+            return response()->json(['data'=>json_encode($winner),'success'=>true]);
+        }
+        return response()->json(['success'=>false]);
     }
 
     public function video(Request $request, $slug)
