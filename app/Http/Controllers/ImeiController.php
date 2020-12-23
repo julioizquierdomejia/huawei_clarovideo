@@ -48,7 +48,7 @@ class ImeiController extends Controller
         $rules = array(
             'name' => 'required|min:3',
             'apellidos' => 'required|min:3',
-            'imei' => 'required|min:5',
+            'imei' => 'required|min:5|unique:users,imei|exists:imeis,code',
             'dni' => 'required|digits:8',
             'celular' => 'required|min:6',
             'email' => 'required|email|max:255|unique:users',
@@ -58,6 +58,7 @@ class ImeiController extends Controller
             'required' => ':attribute es requerido.',
             'email.email' => 'El email debe ser una dirección de correo válida.',
             'email.unique' => 'El email ya fue registrado.',
+            'imei.unique' => 'El imei ya fue usado.',
             'confirm_terms.required' => 'Aceptar términos y condiciones es requerido.',
         );
         $this->validate($request, $rules, $messages);
@@ -69,33 +70,20 @@ class ImeiController extends Controller
         $dni = $request->get('dni');
         $imei = $request->get('imei');
 
-        $user_by_imei = User::where('imei', $imei)->exists();
-        if ($user_by_imei === false) {
-            $imei_by_imei = Imei::where('code', $imei)->exists();
-            if ($imei_by_imei) {
-                $user = new User();
-                $user->name = $name;
-                $user->lastname = $apellidos;
-                $user->email = $email;
-                $user->phone = $celular;
-                $user->dni = $dni;
-                $user->imei = $imei;
-                $user->password = Hash::make(12345678);
-                $user->save();
+        $user = new User();
+        $user->name = $name;
+        $user->lastname = $apellidos;
+        $user->email = $email;
+        $user->phone = $celular;
+        $user->dni = $dni;
+        $user->imei = $imei;
+        $user->password = Hash::make(12345678);
+        $user->save();
 
-                \Auth::login($user);
+        \Auth::login($user);
 
-                return redirect('ruleta');
-            } else {
-                //Codigo invalido
-                $validator->getMessageBag()->add('imei', 'El código no existe.');
-                return redirect()->back()->withErrors($validator);
-            }
-        }
-        //existe imei con otro usuario
-        $validator->getMessageBag()->add('imei', 'El código ya fue usado.'); 
-
-        return redirect()->back()->withErrors($validator);
+        return redirect('ruleta');
+        return redirect()->back();
     }
 
     public function ruleta(Request $request)
