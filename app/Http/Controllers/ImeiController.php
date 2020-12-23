@@ -6,7 +6,9 @@ use App\Models\Imei;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Prize;
+use App\Models\Coupon;
 use App\Models\Winner;
+use App\Models\CouponWinner;
 use Illuminate\Support\Facades\Hash;
 
 class ImeiController extends Controller
@@ -116,6 +118,24 @@ class ImeiController extends Controller
                 $winner->user_id = $user_id;
                 $winner->prize_id = $prize_id;
                 $winner->save();
+
+                if ($prize->type == 'dinamic') {
+                    $coupons = Coupon::where('is_used', 0)
+                            ->limit($prize->quantity)
+                            ->orderBy('created_at', 'asc')
+                            ->get();
+
+                    foreach ($coupons as $key => $coupon) {
+                        $coupon_winner = new CouponWinner();
+                        $coupon_winner->user_id = $user_id;
+                        $coupon_winner->coupon_id = $coupon->id;
+                        $coupon_winner->save();
+
+                        $coupon_updated = Coupon::find($coupon->id);
+                        $coupon_updated->is_used = 1;
+                        $coupon_updated->save();
+                    }
+                }
 
                 $prize_data = $prize->makeHidden('total')->makeHidden('original_total')->makeHidden('quantity');
 
