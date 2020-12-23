@@ -17,6 +17,7 @@ class CreateCouponsTable extends Migration
             $table->id();
             $table->string('code');
             $table->date('validity_date');
+            $table->boolean('is_used')->default(0);
             $table->timestamps();
         });
     }

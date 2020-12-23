@@ -39,7 +39,7 @@
 			</div>
 		</div>
 		<div class="col-12 col-md-6 col-xl-4 d-flex align-items-center py-xl-0 pl-lg-5 mx-md-auto mx-xl-0">
-			<form class="px-xl-3" action="/registro" method="POST" enctype="multipart/form-data">
+			<form class="px-xl-3" action="{{route('registro')}}" method="POST" enctype="multipart/form-data">
 				<h2 class="title px-xl-3"><strong>HOY ES TU DÍA DE SUERTE</strong></h2>
 			@csrf
 			<div class="form-group">
@@ -50,19 +50,19 @@
 			</div>
 			<div class="form-group">
 				<div class="f-group-w-icon">
-				<input type="text" name="lastname" class="form-control border-bottom @error('lastname') is-invalid @enderror" placeholder="Apellidos" value="{{old('lastname')}}">
+				<input type="text" name="apellidos" class="form-control border-bottom @error('apellidos') is-invalid @enderror" placeholder="Apellidos" value="{{old('apellidos')}}">
 				<i class="far fa-user-circle icon"></i>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="f-group-w-icon">
-				<input type="text" name="email" class="form-control border-bottom @error('email') is-invalid @enderror" placeholder="correo electronico" value="{{old(' is')}}">
+				<input type="text" name="email" class="form-control border-bottom @error('email') is-invalid @enderror" placeholder="correo electronico" value="{{old('email')}}">
 				<i class="fas fa-at icon"></i>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="f-group-w-icon">
-				<input type="text" name="phone" class="form-control border-bottom @error('phone') is-invalid @enderror" placeholder="Celular" value="{{old('phone')}}">
+				<input type="text" name="celular" class="form-control border-bottom @error('celular') is-invalid @enderror" placeholder="Celular" value="{{old('celular')}}">
 				<i class="fas fa-mobile-alt icon"></i>
 				</div>
 			</div>
@@ -96,6 +96,22 @@
 @endsection
 @section('javascript')
 <script type="text/javascript">
-	
+	$(document).ready(function (event) {
+		@if ($errors->count())
+	@php
+		$html = '';
+	@endphp
+	@foreach ($errors->all() as $error)
+		@php
+			$html .= '<li>'.$error.'</li>';
+		@endphp
+	@endforeach
+		Swal.fire(
+          'LUCKYDRAW',
+          '<ul class="text-left">{!!$html!!}</ul>',
+          'error'
+        )
+	@endif
+	})
 </script>
 @endsection

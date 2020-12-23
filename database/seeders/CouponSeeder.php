@@ -25,7 +25,7 @@ class CouponSeeder extends Seeder
 
                 $dbData = [
                     'code' => '"'.$data[0].'"',
-                    'validity_date' => '"'.$data[0].'"',
+                    'validity_date' => '2021-03-30',
                 ];
 
                 $colNames = array_keys($dbData);

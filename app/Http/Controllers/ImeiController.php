@@ -40,38 +40,32 @@ class ImeiController extends Controller
 
     public function register()
     {
-        $correo = \Cookie::get('email');
-        $user = User::where('email', '=', $correo)->first();
-
-        if($user)
-            return redirect('ruleta')->with('user');
-        else
-            return view('register');
+        return view('register');
     }
 
     public function store(Request $request)
     {
         $rules = array(
             'name' => 'required|min:3',
-            'lastname' => 'required|min:3',
+            'apellidos' => 'required|min:3',
             'imei' => 'required|min:5',
             'dni' => 'required|digits:8',
-            'phone' => 'required|min:6',
+            'celular' => 'required|min:6',
             'email' => 'required|email|max:255|unique:users',
             'confirm_terms' => 'required|boolean:in:1',
         );
         $messages = array(
-            'required' => 'El :attribute es requerido.',
-            'email' => 'El :attribute debe ser una dirección de correo válida.',
+            'required' => ':attribute es requerido.',
+            'email.email' => 'El email debe ser una dirección de correo válida.',
             'email.unique' => 'El email ya fue registrado.',
             'confirm_terms.required' => 'Aceptar términos y condiciones es requerido.',
         );
-        $validator = \Validator::make($request->all(), $rules, $messages);
+        $this->validate($request, $rules, $messages);
 
         $name = $request->get('name');
-        $lastname = $request->get('lastname');
+        $apellidos = $request->get('apellidos');
         $email = $request->get('email');
-        $phone = $request->get('phone');
+        $celular = $request->get('celular');
         $dni = $request->get('dni');
         $imei = $request->get('imei');
 
@@ -81,9 +75,9 @@ class ImeiController extends Controller
             if ($imei_by_imei) {
                 $user = new User();
                 $user->name = $name;
-                $user->lastname = $lastname;
+                $user->lastname = $apellidos;
                 $user->email = $email;
-                $user->phone = $phone;
+                $user->phone = $celular;
                 $user->dni = $dni;
                 $user->imei = $imei;
                 $user->password = Hash::make(12345678);
