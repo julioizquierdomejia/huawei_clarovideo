@@ -59,6 +59,7 @@ class ImeiController extends Controller
             'email.email' => 'El email debe ser una dirección de correo válida.',
             'email.unique' => 'El email ya fue registrado.',
             'imei.unique' => 'El imei ya fue usado.',
+            'imei.exists' => 'El imei ingresado es inválido.',
             'confirm_terms.required' => 'Aceptar términos y condiciones es requerido.',
         );
         $this->validate($request, $rules, $messages);
