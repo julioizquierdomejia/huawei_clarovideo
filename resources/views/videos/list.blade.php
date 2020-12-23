@@ -66,8 +66,7 @@
 @endsection
 @section('javascript')
 <script type="text/javascript">
-	$(document).ready(function (event) {
-		var options = {!!json_encode($prizes->toArray())!!};
+	var options = {!!json_encode($prizes->toArray())!!};
 
 	var startAngle = 0;
 	var arc = Math.PI / (options.length / 2);
@@ -78,8 +77,6 @@
 	var spinTimeTotal = 0;
 
 	var ctx;
-
-	document.getElementById("spin").addEventListener("click", spin);
 
 	function byte2Hex(n) {
 	  var nybHexString = "0123456789ABCDEF";
@@ -163,13 +160,6 @@
 	  }
 	}
 
-	function spin() {
-	  spinAngleStart = Math.random() * 10 + 10;
-	  spinTime = 0;
-	  spinTimeTotal = Math.random() * 3 + 4 * 1000;
-	  rotateWheel();
-	}
-
 	function rotateWheel() {
 	  spinTime += 30;
 	  if(spinTime >= spinTimeTotal) {
@@ -181,6 +171,13 @@
 	  drawRouletteWheel();
 	  spinTimeout = setTimeout('rotateWheel()', 30);
 	  $('#spin').hide();
+	}
+
+	function spin() {
+	  spinAngleStart = Math.random() * 10 + 10;
+	  spinTime = 0;
+	  spinTimeTotal = Math.random() * 3 + 4 * 1000;
+	  rotateWheel();
 	}
 
 	function stopRotateWheel() {
@@ -238,6 +235,7 @@
 	}
 
 	drawRouletteWheel();
-	})
+
+	document.getElementById("spin").addEventListener("click", spin);
 </script>
 @endsection
