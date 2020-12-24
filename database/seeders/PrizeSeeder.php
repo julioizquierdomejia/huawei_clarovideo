@@ -21,6 +21,7 @@ class PrizeSeeder extends Seeder
         $prize->quantity = 1;
         $prize->type = 'static';
         $prize->enabled = 1;
+        $prize->image = "roulette/headphones.png";
         $prize->save();
 
         $prize = new Prize();
@@ -30,6 +31,7 @@ class PrizeSeeder extends Seeder
         $prize->quantity = 1;
         $prize->type = 'dinamic';
         $prize->enabled = 1;
+        $prize->image = "roulette/1-film.png";
         $prize->save();
 
         $prize = new Prize();
@@ -39,6 +41,7 @@ class PrizeSeeder extends Seeder
         $prize->quantity = 3;
         $prize->type = 'dinamic';
         $prize->enabled = 1;
+        $prize->image = "roulette/3-films.png";
         $prize->save();
 
         $prize = new Prize();
@@ -48,6 +51,7 @@ class PrizeSeeder extends Seeder
         $prize->quantity = 5;
         $prize->type = 'dinamic';
         $prize->enabled = 1;
+        $prize->image = "roulette/5-films.png";
         $prize->save();
 
         $prize = new Prize();
@@ -57,6 +61,7 @@ class PrizeSeeder extends Seeder
         $prize->quantity = 1;
         $prize->type = 'static';
         $prize->enabled = 1;
+        $prize->image = "roulette/phone.png";
         $prize->save();
 
         $prize = new Prize();
@@ -66,6 +71,7 @@ class PrizeSeeder extends Seeder
         $prize->quantity = 1;
         $prize->type = 'static';
         $prize->enabled = 1;
+        $prize->image = "roulette/watch.png";
         $prize->save();
     }
 }
