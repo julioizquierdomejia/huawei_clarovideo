@@ -18,32 +18,33 @@
 	}
 
 	.page .btn.spinner {
+	    border: 10px solid #ffed4a;
+	    background: #fff;
 		cursor: pointer;
-		font-size: 14px;
-		font-weight: bold;
-		border: none;
-		position: absolute;
-		width: 50px;
-		height: 50px;
-		top: 50%;
-		left: 50%;
-		margin-top: -25px;
-		margin-left: -25px;
-		border-radius: 100%;
-		z-index: 1000;
-		min-width: auto;
-		padding: 0;
+	    font-size: 14px;
+	    font-weight: bold;
+	    position: absolute;
+	    width: 80px;
+	    height: 80px;
+	    top: 50%;
+	    left: 50%;
+	    margin-top: -40px;
+	    margin-left: -40px;
+	    border-radius: 100%;
+	    min-width: auto;
+	    padding: 0;
+	    z-index: 1000;
 	}
 
 	.spinner .pointer {
 		position: absolute;
 		width: 0; 
 		height: 0; 
-		top: -8px;
-		left: 15px;
+		top: -29px;
+		left: 20px;
 		border-left: 10px solid transparent;
 		border-right: 10px solid transparent;
-		border-bottom: 10px solid #ffed4a;
+		border-bottom: 20px solid #ffed4a;
 	}
 	@media (max-width: 400px) {
 		.roulette {
@@ -81,7 +82,10 @@
 				<div class="roulette-container">
 				  <div class="roulette">
 				  </div>
-				  <button class="btn btn-warning spinner" type="button"><span>Girar!</span><div class="pointer"></div></button>  
+				  <button class="btn btn-warning spinner" type="button"><span>Click <br>aquí</span><div class="pointer"></div></button>  
+				</div>
+				<div class="base user-select-none" style="margin-top: -10px">
+					<img alt="" src="{{ asset('img/base-ruleta.png') }}" width="200">
 				</div>
 				<div class="price mt-4">
 				</div>
