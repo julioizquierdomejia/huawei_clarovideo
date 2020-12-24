@@ -32,26 +32,6 @@
 @endsection
 @section('content')
 <div class="cc-huawei pt-5 container">
-	@php
-	$lineNumber = 0;
-		if (($handle = fopen(base_path("public/coupons.txt"), "r")) !== false) {
-            while (($data = fgets($handle)) !== false) {
-                if ($lineNumber === 1) {
-                    $lineNumber++;
-                    continue;
-                }
-                $lineNumber++;
-
-                $row = str_getcsv($data, ";");
-                var_dump($row[0]);
-                if ($lineNumber == 20){
-                	break;
-                }
-                //$date = date('Y-m-d', strtotime(str_replace("/", "-", $row[1])));
-            }
-            fclose($handle);
-        }
-	@endphp
 	<div class="row pl-lg-5" style="min-height: calc(100vh - 73px)">
 		<div class="col-12 col-md-6 d-flex align-items-center col-xl-4 py-2 py-xl-0 pl-lg-5">
 			<div class="cc pl-lg-5">
