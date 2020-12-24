@@ -1,47 +1,61 @@
 @extends('layouts.app', ['title' => 'LuckyDraw'])
 @section('header_script')
 <style type="text/css">
-
 	.roulette-container {
-	  position: relative;
+		position: relative;
+		max-width: 100%;
 	}
 	.roulette {
-	  margin: 0 auto;
-	  width: 400px;
-	  height: 400px;
-	  background-color: white;
-	  background-image: url('{{ asset('img/ruleta_fondo.png') }}');
-	  background-size: contain;
-	  border-radius: 300px;
+		margin: 0 auto;
+		width: 400px;
+		height: 400px;
+		background-color: white;
+		background-image: url('{{ asset('img/ruleta_fondo.png') }}');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		border-radius: 300px;
 	}
 
 	.page .btn.spinner {
-	  cursor: pointer;
-	  font-size: 14px;
-	  font-weight: bold;
-	  border: none;
-	  position: absolute;
-	  width: 50px;
-	  height: 50px;
-	  top: 50%;
-	  left: 50%;
-	  margin-top: -25px;
-	  margin-left: -25px;
-	  border-radius: 100%;
-	  z-index: 1000;
-	  min-width: auto;
-	  padding: 0;
+		cursor: pointer;
+		font-size: 14px;
+		font-weight: bold;
+		border: none;
+		position: absolute;
+		width: 50px;
+		height: 50px;
+		top: 50%;
+		left: 50%;
+		margin-top: -25px;
+		margin-left: -25px;
+		border-radius: 100%;
+		z-index: 1000;
+		min-width: auto;
+		padding: 0;
 	}
 
 	.spinner .pointer {
-	  position: absolute;
-	  width: 0; 
+		position: absolute;
+		width: 0; 
 		height: 0; 
-	  top: -8px;
-	  left: 15px;
+		top: -8px;
+		left: 15px;
 		border-left: 10px solid transparent;
 		border-right: 10px solid transparent;
 		border-bottom: 10px solid #ffed4a;
+	}
+	@media (max-width: 400px) {
+		.roulette {
+			width: 380px;
+			height: 380px;
+		}
+	}
+	@media (max-width: 380px) {
+		.roulette {
+			width: 320px;
+			height: 320px;
+		}
 	}
 </style>
 @endsection
@@ -69,8 +83,7 @@
 				  </div>
 				  <button class="btn btn-warning spinner" type="button"><span>Girar!</span><div class="pointer"></div></button>  
 				</div>
-
-				<div class="price">
+				<div class="price mt-4">
 				</div>
 			</div>
 		</div>
@@ -117,6 +130,7 @@ var clickHandler = function() {
                   'warning'
                 ).then((after) => {
                     $('.prize').hide();
+                    $('.price').text(result.data);
                 })
             }
         },
