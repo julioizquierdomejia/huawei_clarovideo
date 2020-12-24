@@ -19,6 +19,7 @@ class CouponSeeder extends Seeder
     public function run()
     {
         $lineNumber = 1;
+        $date = '2021-03-30';
         if (($handle = fopen(base_path("public/coupons.csv"), "r")) !== false) {
             while (($data = fgets($handle)) !== false) {
                 if ($lineNumber === 1) {
@@ -28,7 +29,7 @@ class CouponSeeder extends Seeder
                 $lineNumber++;
 
                 $row = str_getcsv($data, ";");
-                $date = date('Y-m-d', strtotime(str_replace("/", "-", $row[1])));
+                //$date = date('Y-m-d', strtotime(str_replace("/", "-", $row[1])));
 
                 $createQuery = 'INSERT INTO coupons (code, validity_date) VALUES ("'.$row[0].'","'.$date.'")';
 
@@ -37,5 +38,27 @@ class CouponSeeder extends Seeder
             }
             fclose($handle);
         }
+
+        /*$lineNumber = 1;
+        $date = '2021-03-30';
+        $today = date('Y-m-d H:i:s');
+        if (($handle = fopen(base_path("public/coupons.txt"), "r")) !== false) {
+            while (($data = fgets($handle)) !== false) {
+                if ($lineNumber === 1) {
+                    $lineNumber++;
+                    continue;
+                }
+                $lineNumber++;
+
+                $row = str_getcsv($data, ";");
+                //$date = date('Y-m-d', strtotime(str_replace("/", "-", $row[1])));
+
+                $createQuery = 'INSERT INTO `coupons`(`id`, `code`, `validity_date`, `is_used`, `created_at`, `updated_at`) VALUES (null, `'.$row[0].'`,`'.$date.'`, 0, `'.$today.'`, `'.$today.'`)';
+
+                DB::statement($createQuery, $row);
+                $this->command->info($lineNumber);
+            }
+            fclose($handle);
+        }*/
     }
 }

@@ -16,7 +16,7 @@ class ImeiSeeder extends Seeder
     {
         //
         $lineNumber = 1;
-        if (($handle = fopen(base_path("public/imeis.csv"), "r")) !== false) {
+        if (($handle = fopen(base_path("public/imeis.txt"), "r")) !== false) {
             while (($data = fgets($handle)) !== false) {
                 if ($lineNumber === 1) {
                     $lineNumber++;
@@ -26,7 +26,7 @@ class ImeiSeeder extends Seeder
 
                 $row = str_getcsv($data, ",");
 
-                $createQuery = 'INSERT INTO imeis (code) VALUES ('.$row[0].')';
+                $createQuery = 'INSERT INTO imeis (code) VALUES ("'.$row[0].'")';
 
                 DB::statement($createQuery, $row);
                 $this->command->info($lineNumber);
