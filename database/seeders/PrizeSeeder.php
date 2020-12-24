@@ -14,6 +14,8 @@ class PrizeSeeder extends Seeder
      */
     public function run()
     {
+        \DB::table('prizes')->truncate();
+
         $prize = new Prize();
         $prize->name = 'Freebuds 3i';
         $prize->original_total = 100;
@@ -35,13 +37,13 @@ class PrizeSeeder extends Seeder
         $prize->save();
 
         $prize = new Prize();
-        $prize->name = '3 películas de alquiler gratis en Claro Vídeo';
+        $prize->name = 'Watch GT-2';
         $prize->original_total = 100;
         $prize->total = 100;
-        $prize->quantity = 3;
-        $prize->type = 'dinamic';
+        $prize->quantity = 1;
+        $prize->type = 'static';
         $prize->enabled = 1;
-        $prize->image = "roulette/3-films.png";
+        $prize->image = "roulette/watch.png";
         $prize->save();
 
         $prize = new Prize();
@@ -65,13 +67,13 @@ class PrizeSeeder extends Seeder
         $prize->save();
 
         $prize = new Prize();
-        $prize->name = 'Watch GT-2';
+        $prize->name = '3 películas de alquiler gratis en Claro Vídeo';
         $prize->original_total = 100;
         $prize->total = 100;
-        $prize->quantity = 1;
-        $prize->type = 'static';
+        $prize->quantity = 3;
+        $prize->type = 'dinamic';
         $prize->enabled = 1;
-        $prize->image = "roulette/watch.png";
+        $prize->image = "roulette/3-films.png";
         $prize->save();
     }
 }

@@ -8,7 +8,7 @@
     var options = $.extend({}, {
       prices: args,
       duration: 1000,
-      separation: 2,
+      separation: 0,
       min_spins: 10,
       max_spins: 15,
       onSpinBounce: function() {}
@@ -25,7 +25,7 @@
       var position = Math.floor(prices_delta * (price - 1/2) + randomBetween(options.separation, prices_delta - options.separation));
       var spins = randomBetween(options.min_spins, options.max_spins);
       var final_position = 360 * spins + position;
-      var prev_position = 1;
+      var prev_position = 0;
       var is_bouncing = false;
 
       is_spinning = true;

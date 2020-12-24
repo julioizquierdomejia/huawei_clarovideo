@@ -86,7 +86,6 @@ class ImeiController extends Controller
         \Auth::login($user);
 
         return redirect('ruleta');
-        return redirect()->back();
     }
 
     public function ruleta(Request $request)
