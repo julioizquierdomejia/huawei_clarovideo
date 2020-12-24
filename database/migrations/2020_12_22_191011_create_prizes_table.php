@@ -20,6 +20,7 @@ class CreatePrizesTable extends Migration
             $table->integer('total');
             $table->integer('quantity');
             $table->string('type');
+            $table->string('image');
             $table->boolean('enabled')->default(1);
             $table->timestamps();
         });
