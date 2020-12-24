@@ -106,6 +106,7 @@ class ImeiController extends Controller
         $exist_winner = Winner::where('user_id', $user_id)->exists();
 
         $prize = Prize::findOrFail($prize_id);
+        $coupons = [];
         if ($prize->total >= $prize->quantity) {
             if ($exist_winner) {
                 return response()->json(['data'=>"Ya ganó :)", 'success'=>false]);
@@ -140,7 +141,7 @@ class ImeiController extends Controller
                             $coupon_updated->is_used = 1;
                             $coupon_updated->save();
                         }
-                        return response()->json(['data'=>json_encode($prize_data),'success'=>true]);
+                        return response()->json(['data'=>json_encode($prize_data), 'coupons' => json_encode($coupons),'success'=>true]);
                     } else {
                         return response()->json(['data'=>"Alguien más se adelantó :(", 'success'=>false]);
                     }

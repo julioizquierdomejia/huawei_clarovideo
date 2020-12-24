@@ -64,7 +64,7 @@
 <div class="cc-huawei pt-5 container-fluid text-white">
 
 	<div class="row pb-3 pl-lg-5 align-items-center">
-		<div class="col-12 col-md-5 col-lg-4 py-2 pl-lg-5">
+		<div class="col-12 col-md-5 col-lg-3 py-2 pl-lg-5">
 			<div class="cc pl-lg-5 h-100">
 			<div class="row pl-lg-5 h-100">
 				<div class="col-12 pt-lg-3 page-title text-center text-md-left">
@@ -76,7 +76,7 @@
 			</div>
 			</div>
 		</div>
-		<div class="col-12 col-md-7 col-lg-8 text-center">
+		<div class="col-12 col-md-7 col-lg-5 text-center">
 			<div class="d-inline-block pt-md-5">
 			
 				<div class="roulette-container">
@@ -87,9 +87,16 @@
 				<div class="base user-select-none" style="margin-top: -10px">
 					<img alt="" src="{{ asset('img/base-ruleta.png') }}" width="200">
 				</div>
-				<div class="price mt-4">
-				</div>
 			</div>
+		</div>
+		<div class="col-12 col-md-5 col-lg-3 py-2 pl-lg-5 prize-container" style="display: none;">
+			<div class="cc pl-lg-5 h-100 pt-3 mb-3">
+				<h1 class="title pt-md-4">FELICIDADES</h1>
+				<p class="mt-3 subtitle" style="font-size: 18px">Acabaste de ganar</p>
+				<div class="prize_item mt-4"></div>
+				<ul class="coupons list-inline mt-5 mb-4"></ul>
+			</div>
+			<a class="btn btn-danger d-inline-flex align-items-center pl-4" href="/registro"><span class="mx-auto"><span class="pl-4">Volver</span></span> <i class="fas fa-chevron-circle-left ml-auto"></i></a>
 		</div>
 	</div>
 </div>
@@ -106,7 +113,7 @@ var $r = $('.roulette').fortune(options);
 var clickHandler = function() {
   $('.spinner').off('click');
   $('.spinner span').hide();
-  $r.spin().done(function(price) {
+  $r.spin().done(function(prize_item) {
   	$('.spinner').on('click', clickHandler);
   	$('.spinner span').show();
     $.ajax({
@@ -114,18 +121,38 @@ var clickHandler = function() {
         url: '/winner',
         data: {
         	'_token': '{{csrf_token()}}',
-        	'prize_id': price.id
+        	'prize_id': prize_item.id
         },
         success: function(result) {
         	console.log(result)
             if(result.success) {
             	data = $.parseJSON(result.data);
+            	$('.coupons').empty().show();
                 Swal.fire(
                   'LUCKYDRAW',
                   'Su premio es: ' + data.name,
                   'success'
                 ).then((after) => {
-				    $('.price').text('Ganaste: ' + price.name);
+                	coupons = result.coupons ? $.parseJSON(result.coupons) : [];
+                	$.each(coupons, function (id, item) {
+                		$('.coupons').append(
+                			`<li>`+item.code+`</li>`
+                			)
+                	})
+                	$('.prize-container').slideDown();
+				    $('.prize_item').text(prize_item.name);
+				    $.ajax
+	                ({
+	                    type: 'POST',
+	                    url: '/logout',
+	                    data: {
+				        	'_token': '{{csrf_token()}}',
+				        },
+	                    success: function()
+	                    {
+	                        //location.reload();
+	                    }
+	                });
                 })
             } else {
                 Swal.fire(
@@ -133,10 +160,11 @@ var clickHandler = function() {
                   result.data,
                   'warning'
                 ).then((after) => {
-                    $('.prize').hide();
-                    $('.price').text(result.data);
+                    $('.prize-container').hide();
+                    $('.prize_item').text(result.data);
                 })
             }
+            $('.spinner').attr('disabled', true);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             var errors = jqXHR.responseJSON;
@@ -148,5 +176,6 @@ var clickHandler = function() {
 
 $('.spinner').on('click', clickHandler);
 });
+
 </script>
 @endsection

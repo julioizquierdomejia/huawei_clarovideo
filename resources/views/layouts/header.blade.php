@@ -8,14 +8,6 @@
       <img class="logo" src="{{ asset('img/logo_claro_video.png') }}" width="160" style="margin-bottom: 8px;">
     </a>
     <ul class="navbar-nav ml-auto align-items-center flex-row">
-      <li class="nav-item">
-        @if (Auth::user())
-        <form id="logout-form" action="{{ route('logout') }}" method="POST">
-          @csrf
-          <button class="btn btn-sm text-white" href="/logout" style="font-size: 15px;min-width: 0" type="submit"><span class="d-none d-md-inline-block">Cerrar sesión</span> <i class="fas fa-sign-out-alt"></i></button>
-        </form>
-        @endif
-      </li>
       <li class="nav-item d-none d-md-block">
         <a class="nav-link" href="https://consumer.huawei.com/pe/mobileservices/appgallery/">
           <img class="logo-app_gallery" src="{{ asset('img/exploralo-app-gallery.png') }}" width="140"></a>
