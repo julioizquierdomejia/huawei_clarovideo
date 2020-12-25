@@ -102,7 +102,7 @@
 </div>
 @endsection
 @section('javascript')
-<script type="text/javascript" src="{{ asset('online/jquery.fortune.js') }}"></script>
+<script type="text/javascript" src="{{ asset('online/jquery.fortune.js') }}?v=2"></script>
 <script>
 var options = {!!json_encode($prizes->toArray())!!};
 
