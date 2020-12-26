@@ -14,7 +14,7 @@ class PrizeSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('prizes')->truncate();
+        
 
         $prize = new Prize();
         $prize->name = 'Freebuds 3i';
