@@ -11,6 +11,9 @@ use App\Models\Winner;
 use App\Models\CouponWinner;
 use Illuminate\Support\Facades\Hash;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PrizeReceived;
+
 class ImeiController extends Controller
 {
     /**
@@ -122,6 +125,7 @@ class ImeiController extends Controller
                             ->orderBy('created_at', 'asc')
                             ->get();
                     if ($coupons->count()) {
+                        Mail::to(\Auth::user()->email)->send(new PrizeReceived($coupons, $prize));
                         //Reducir total si existen cupones
                         $prize->total -= $prize->quantity;
                         $prize->save();

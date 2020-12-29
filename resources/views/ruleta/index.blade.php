@@ -95,6 +95,7 @@
 				<p class="mt-3 subtitle" style="font-size: 18px">Acabaste de ganar</p>
 				<div class="prize_item mt-4"></div>
 				<ul class="coupons list-inline mt-5 mb-4"></ul>
+				<p class="coupons-message" style="display: none;">Te hemos enviado un correo a {{Auth::user()->email}}</p>
 			</div>
 			<a class="btn btn-danger d-inline-flex align-items-center pl-4" href="/registro"><span class="mx-auto"><span class="pl-4">Volver</span></span> <i class="fas fa-chevron-circle-left ml-auto"></i></a>
 		</div>
@@ -125,6 +126,7 @@ var clickHandler = function() {
         },
         success: function(result) {
         	console.log(result)
+        	$('.coupons-message').hide();
             if(result.success) {
             	data = $.parseJSON(result.data);
             	$('.coupons').empty().show();
@@ -141,7 +143,8 @@ var clickHandler = function() {
                 	})
                 	$('.prize-container').slideDown();
 				    $('.prize_item').text(prize_item.name);
-				    $.ajax
+				    $('.coupons-message').show();
+				    /*$.ajax
 	                ({
 	                    type: 'POST',
 	                    url: '/logout',
@@ -152,7 +155,7 @@ var clickHandler = function() {
 	                    {
 	                        //location.reload();
 	                    }
-	                });
+	                });*/
                 })
             } else {
                 Swal.fire(
