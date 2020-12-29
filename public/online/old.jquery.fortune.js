@@ -33,9 +33,9 @@
         }
       });
       var r = Math.random();
-      if(r < 0.1) price = random(dinamic) //boletos
-        else if(r < 0.9) price = random(static) //caros
-        price = price == prices_amount ? 1 : price;
+      if(r <0.1) r = Math.random(static) //caros
+        else if(r < 0.9) r = Math.random(dinamic) //boletos
+      price = Math.floor(r * prices_amount);
       var deferred = $.Deferred();
       var position = Math.floor(prices_delta * (price) + randomBetween(options.separation, prices_delta - options.separation));
       var spins = randomBetween(options.min_spins, options.max_spins);
@@ -128,15 +128,6 @@
     var randomBetween = function(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     };
-
-    function random(array) {
-      const randomElement = array[Math.floor(Math.random() * array.length)];
-      /*var min = Math.min.apply(Math, array), max = Math.max.apply(Math, array);
-      random_value = (Math.random() * (max - min + 1)) + min;*/
-      return randomElement;
-    }
-
-    console.log(fortune)
 
     return fortune;
   };
