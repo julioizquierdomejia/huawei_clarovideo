@@ -110,6 +110,7 @@ class ImeiController extends Controller
 
         $prize = Prize::findOrFail($prize_id);
         $coupons = [];
+        $send_email = false;
         if ($prize->total >= $prize->quantity) {
             if ($exist_winner) {
                 return response()->json(['data'=>"Ya ganó :)", 'success'=>false]);
@@ -125,7 +126,10 @@ class ImeiController extends Controller
                             ->orderBy('created_at', 'asc')
                             ->get();
                     if ($coupons->count()) {
-                        Mail::to(\Auth::user()->email)->send(new PrizeReceived($coupons, $prize));
+                        if (env('SEND_MAIL')) {
+                            Mail::to(\Auth::user()->email)->send(new PrizeReceived($coupons, $prize));
+                            $send_email = true;
+                        }
                         //Reducir total si existen cupones
                         $prize->total -= $prize->quantity;
                         $prize->save();
@@ -145,7 +149,7 @@ class ImeiController extends Controller
                             $coupon_updated->is_used = 1;
                             $coupon_updated->save();
                         }
-                        return response()->json(['data'=>json_encode($prize_data), 'coupons' => json_encode($coupons),'success'=>true]);
+                        return response()->json(['data'=>json_encode($prize_data), 'coupons' => json_encode($coupons), 'send_email' => $send_email, 'success'=>true]);
                     } else {
                         return response()->json(['data'=>"Alguien más se adelantó :(", 'success'=>false]);
                     }

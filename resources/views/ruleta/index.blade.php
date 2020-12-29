@@ -143,7 +143,7 @@ var clickHandler = function() {
                 	})
                 	$('.prize-container').slideDown();
 				    $('.prize_item').text(prize_item.name);
-				    if(coupons.length) {
+				    if(coupons.length && result.send_email) {
 				    	$('.coupons-message').show();
 				    }
 				    $.ajax
