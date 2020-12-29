@@ -8,7 +8,7 @@
     var options = $.extend({}, {
       prices: args,
       duration: 1000,
-      separation: 0,
+      separation: 1,
       min_spins: 10,
       max_spins: 15,
       onSpinBounce: function() {}
@@ -19,13 +19,28 @@
     var prices_delta = 360 / prices_amount;
     var is_spinning = false;
 
-    fortune.spin = function(price) {
-      price = typeof price === "number"?price:Math.floor(Math.random() * prices_amount);
+    fortune.spin = function() {
+      var dinamic = [];
+      var static = [];
+      $.each(options.prices, function (id, item) {
+        if (item.type == 'dinamic') {
+          dinamic.push(item.id);
+        }
+      });
+      $.each(options.prices, function (id, item) {
+        if (item.type == 'static') {
+          static.push(item.id);
+        }
+      });
+      var r = Math.random();
+      if(r <0.1) r = Math.random(static) //caros
+        else if(r < 0.9) r = Math.random(dinamic) //boletos
+      price = Math.floor(r * prices_amount);
       var deferred = $.Deferred();
       var position = Math.floor(prices_delta * (price) + randomBetween(options.separation, prices_delta - options.separation));
       var spins = randomBetween(options.min_spins, options.max_spins);
       var final_position = 360 * spins + position;
-      var prev_position = 0;
+      var prev_position = 1;
       var is_bouncing = false;
 
       is_spinning = true;
