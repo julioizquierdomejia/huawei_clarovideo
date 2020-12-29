@@ -188,19 +188,13 @@
     2. center tag: for Gmail and Inbox mobile apps and web versions of Gmail, GSuite, Inbox, Yahoo, AOL, Libero, Comcast, freenet, Mail.ru, Orange.fr
     3. mso conditional: For Windows 10 Mail
 -->
-<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #222222;">
-    <center role="article" aria-roledescription="email" lang="en" style="width: 100%; background-color: #222222;">
+<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #000000;">
+    <center role="article" aria-roledescription="email" lang="en" style="width: 100%; background-color: #000000;">
     <!--[if mso | IE]>
-    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #222222;">
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #000000;">
     <tr>
     <td>
     <![endif]-->
-
-        <!-- Visually Hidden Preheader Text : BEGIN -->
-        <div style="max-height:0; overflow:hidden; mso-hide:all;" aria-hidden="true">
-            (Optional) This text will appear in the inbox preview, but not the email body. It can be used to supplement the email subject line or even summarize the email's contents. Extended text preheaders (~490 characters) seems like a better UX for anyone using a screenreader or voice-command apps like Siri to dictate the contents of an email. If this text is not included, email clients will automatically populate it using the text (including image alt text) at the start of the email's body.
-        </div>
-        <!-- Visually Hidden Preheader Text : END -->
 
         <!-- Create white space after the desired preview text so email clients don’t pull other distracting text into the inbox preview. Extend as necessary. -->
         <!-- Preview Text Spacing Hack : BEGIN -->
@@ -230,13 +224,6 @@
                     </td>
                 </tr>
                 <!-- Email Header : END -->
-
-                <!-- Hero Image, Flush : BEGIN -->
-                <tr>
-                    <td style="background-color: #ffffff;">
-                        <img src="{{ asset('img/feliz-navidad.png') }}" width="600" height="" alt="alt_text" border="0" style="width: 100%; max-width: 600px; height: auto; background: #dddddd; font-family: sans-serif; font-size: 15px; line-height: 15px; color: #555555; margin: auto; display: block;" class="g-img">
-                    </td>
-                </tr>
                 <!-- Hero Image, Flush : END -->
                 <tr>
                     <td aria-hidden="true" height="40" style="font-size: 0px; line-height: 0px;">
@@ -251,13 +238,15 @@
                                 <td valign="top">
                                     <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                                         <tr>
-                                            <td style="text-align: center; padding: 0 10px;">
-                                                <img src="https://via.placeholder.com/200" width="200" height="" alt="alt_text" border="0" style="width: 100%; max-width: 200px; background: #dddddd; font-family: sans-serif; font-size: 15px; line-height: 15px; color: #555555;">
-                                            </td>
-                                        </tr>
-                                        <tr>
                                             <td style="text-align: left; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; padding: 10px 10px 0;">
-                                               <p style="margin: 0;">Maecenas sed ante pellentesque, posuere leo id, eleifend dolor.</p>
+                                                <h1 class="title" style="font-family: sans-serif;">FELICIDADES</h1>
+                                                <p style="font-size: 14px; font-family: sans-serif;">Acabaste de ganar</p>
+                                                <p style="font-size: 14px; font-family: sans-serif;">{{$prize->name}}</p>
+                                                <ul>
+                                                @foreach ($coupons as $coupon)
+                                                   <li>{{$coupon->code}}</li>
+                                                @endforeach
+                                               </ul>
                                             </td>
                                         </tr>
                                     </table>
@@ -276,36 +265,8 @@
                 </tr>
                 <!-- Clear Spacer : END -->
 
-                <!-- 1 Column Text : BEGIN -->
-                <tr>
-                    <td style="background-color: #ffffff;">
-                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                            <tr>
-                                <td style="padding: 20px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
-                                    <p style="margin: 0;">Maecenas sed ante pellentesque, posuere leo id, eleifend dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent laoreet malesuada cursus. Maecenas scelerisque congue eros eu posuere. Praesent in felis ut velit pretium lobortis rhoncus ut&nbsp;erat.</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <!-- 1 Column Text : END -->
-
             </table>
             <!-- Email Body : END -->
-
-            <!-- Email Footer : BEGIN -->
-            <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
-                <tr>
-                    <td style="padding: 20px; font-family: sans-serif; font-size: 12px; line-height: 15px; text-align: center; color: #ffffff;">
-                        <webversion style="color: #ffffff; text-decoration: underline; font-weight: bold;">View as a Web Page</webversion>
-                        <br><br>
-                        Company Name<br><span class="unstyle-auto-detected-links">123 Fake Street, SpringField, OR, 97477 US<br>(123) 456-7890</span>
-                        <br><br>
-                        <unsubscribe style="color: #ffffff; text-decoration: underline;">unsubscribe</unsubscribe>
-                    </td>
-                </tr>
-            </table>
-            <!-- Email Footer : END -->
 
             <!--[if mso]>
             </td>
@@ -315,7 +276,7 @@
         </div>
 
         <!-- Full Bleed Background Section : BEGIN -->
-        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #709f2b;">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #222222;">
             <tr>
                 <td>
                     <div align="center" style="max-width: 600px; margin: auto;" class="email-container">
@@ -326,8 +287,8 @@
                         <![endif]-->
                         <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                             <tr>
-                                <td style="padding: 20px; text-align: left; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #ffffff;">
-                                    <p style="margin: 0;">Maecenas sed ante pellentesque, posuere leo id, eleifend dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent laoreet malesuada cursus. Maecenas scelerisque congue eros eu posuere. Praesent in felis ut velit pretium lobortis rhoncus ut&nbsp;erat.</p>
+                                <td style="padding: 20px; text-align: center; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #ffffff;">
+                                    <p style="margin: 0;"><a href="{{ url('terminos-condiciones') }}" style="color: #fff;font-family: sans-serif;">Términos y condiciones</a></p>
                                 </td>
                             </tr>
                         </table>

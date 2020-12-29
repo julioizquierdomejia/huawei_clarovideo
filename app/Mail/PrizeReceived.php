@@ -2,13 +2,13 @@
 
 namespace App\Mail;
 
+use App\Models\Prize;
+use App\Models\Coupon;
+
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-
-use App\Models\Prize;
-use App\Models\Coupon;
 
 class PrizeReceived extends Mailable
 {
@@ -30,12 +30,12 @@ class PrizeReceived extends Mailable
      *
      * @var \App\Models\Coupon
      */
-    public $coupon;
+    public $coupons;
 
-    public function __construct(Coupon $coupon, Prize $prize)
+    public function __construct($coupons, Prize $prize)
     {
         $this->prize = $prize;
-        $this->coupon = $coupon;
+        $this->coupons = $coupons;
     }
 
     /**
@@ -45,6 +45,6 @@ class PrizeReceived extends Mailable
      */
     public function build()
     {
-        return $this->view('views.emails.winner');
+        return $this->view('emails.winner');
     }
 }
