@@ -32,6 +32,7 @@
           static.push(item.id);
         }
       });
+      price = 1;
       var r = Math.random();
       if(r < 0.1) price = random(dinamic) //boletos
         else if(r < 0.9) price = random(static) //caros
