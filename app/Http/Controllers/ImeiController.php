@@ -93,12 +93,15 @@ class ImeiController extends Controller
 
     public function ruleta(Request $request)
     {
+        $production = env('ROULETTE_PRODUCTION');
         $prizes = Prize::where('enabled', 1)->get();
-        return view('ruleta.index', compact('prizes'));
+
+        return view('ruleta.index', compact('prizes', 'production'));
     }
 
     public function storeWinner(Request $request)
     {
+        $production = env('ROULETTE_PRODUCTION');
         $rules = array(
             'prize_id' => 'required|exists:prizes,id',
         );
@@ -134,21 +137,24 @@ class ImeiController extends Controller
                         $prize->total -= $prize->quantity;
                         $prize->save();
 
-                        $winner = new Winner();
-                        $winner->user_id = $user_id;
-                        $winner->prize_id = $prize_id;
-                        $winner->save();
+                        if ($production) {
+                            $winner = new Winner();
+                            $winner->user_id = $user_id;
+                            $winner->prize_id = $prize_id;
+                            $winner->save();
 
-                        foreach ($coupons as $key => $coupon) {
-                            $coupon_winner = new CouponWinner();
-                            $coupon_winner->user_id = $user_id;
-                            $coupon_winner->coupon_id = $coupon->id;
-                            $coupon_winner->save();
+                            foreach ($coupons as $key => $coupon) {
+                                $coupon_winner = new CouponWinner();
+                                $coupon_winner->user_id = $user_id;
+                                $coupon_winner->coupon_id = $coupon->id;
+                                $coupon_winner->save();
 
-                            $coupon_updated = Coupon::find($coupon->id);
-                            $coupon_updated->is_used = 1;
-                            $coupon_updated->save();
+                                $coupon_updated = Coupon::find($coupon->id);
+                                $coupon_updated->is_used = 1;
+                                $coupon_updated->save();
+                            }
                         }
+                        
                         return response()->json(['data'=>json_encode($prize_data), 'coupons' => json_encode($coupons), 'send_email' => $send_email, 'success'=>true]);
                     } else {
                         return response()->json(['data'=>"Alguien más se adelantó :(", 'success'=>false]);
@@ -157,11 +163,12 @@ class ImeiController extends Controller
                     //Reducir si no es cupon pero existe el premio
                     $prize->total -= $prize->quantity;
                     $prize->save();
-
-                    $winner = new Winner();
-                    $winner->user_id = $user_id;
-                    $winner->prize_id = $prize_id;
-                    $winner->save();
+                    if ($production) {
+                        $winner = new Winner();
+                        $winner->user_id = $user_id;
+                        $winner->prize_id = $prize_id;
+                        $winner->save();
+                    }
 
                     return response()->json(['data'=>json_encode($prize_data),'success'=>true]);
                 }

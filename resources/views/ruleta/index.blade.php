@@ -146,6 +146,7 @@ var clickHandler = function() {
 				    if(coupons.length && result.send_email) {
 				    	$('.coupons-message').show();
 				    }
+				    @if ($production)
 				    $.ajax
 	                ({
 	                    type: 'POST',
@@ -158,6 +159,7 @@ var clickHandler = function() {
 	                        //location.reload();
 	                    }
 	                });
+				    @endif
                 })
             } else {
                 Swal.fire(
@@ -169,7 +171,9 @@ var clickHandler = function() {
                     $('.prize_item').text(result.data);
                 })
             }
+            @if ($production)
             $('.spinner').attr('disabled', true);
+            @endif
         },
         error: function (jqXHR, textStatus, errorThrown) {
             var errors = jqXHR.responseJSON;
